@@ -9,6 +9,10 @@ import Signup from './pages/Signup'
 import NotFound from './pages/NotFound'
 // import your project pages below:
 // import Dashboard from './pages/Dashboard'
+import ViewPublishedBlogs from './pages/Blogs'
+import BlogDetails from './pages/BlogDetails'
+import CreateComment from './pages/CreateComment'
+import EditComment from './pages/EditComment'
 
 function App(){
   return (
@@ -19,8 +23,9 @@ function App(){
         <Navbar />
         <main style={{padding:'1rem'}}>
           <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/login' element={<Signup />}/>
+            <Route path='/' element={<ViewPublishedBlogs />}/>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/signup' element={<Signup />}/>
             {/* Protected route example: */}
             {/* <Route
               path="/dashboard"
@@ -32,6 +37,17 @@ function App(){
             /> */}
 
             <Route path="*" element={<NotFound />}/>
+            <Route path='/blogs/:blogId' element={<BlogDetails />}/>
+            <Route path='/blogs/:blogId/comments/:commentId/edit' element={
+              <ProtectedRoute>
+                <EditComment />
+              </ProtectedRoute>
+            }/>
+            <Route path='/blogs/:blogId/comments/new' element={
+              <ProtectedRoute>
+                <CreateComment />
+              </ProtectedRoute>
+            }/>
           </Routes>
         </main>
       </BrowserRouter>
